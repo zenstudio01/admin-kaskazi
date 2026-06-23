@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/env";
+import Swal from "sweetalert2";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ export default function Login() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/admin/login/",
+        `${API_URL}/signin/`,
         {
           method: "POST",
           headers: {
@@ -39,17 +41,39 @@ export default function Login() {
       );
 
       const data = await response.json();
+      console.log(data);
 
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
+      if (response.status === 200 || response.status === 201) {
+        if(data.user.role === "admin"){
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+            localStorage.setItem("admin",JSON.stringify(data.user));
+            navigate("/dashboard");
 
-        navigate("/");
+        }else{
+            Swal.fire({
+                icon: "error",
+                title: "Unauthorized",
+                text: "Only admin are allowed here!.",
+            });
+
+        }
+        
       } else {
-        alert(data.message || "Login failed");
+        Swal.fire({
+          icon: "error",
+          title: "Login failed",
+          text: data.message || 'Login in failed',
+        });
       }
     } catch (error) {
       console.error(error);
-      alert("Unable to connect to server");
+    //   alert("Unable to connect to server");
+      Swal.fire({
+          icon: "error",
+          title: "Server error",
+          text: 'Unable to connect to server!.',
+      });
     } finally {
       setLoading(false);
     }

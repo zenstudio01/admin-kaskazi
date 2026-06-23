@@ -7,6 +7,7 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
+import api from "../api/api";
 
 export default function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -14,15 +15,13 @@ export default function Jobs() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const API_URL = "http://127.0.0.1:8000/api";
-
   const fetchJobs = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/admin_jobs/`
+      const response = await api.get(
+        `/admin_jobs/`
       );
 
-      const data = await response.json();
+      const data = response.data;
 
       setJobs(data);
       setFilteredJobs(data);

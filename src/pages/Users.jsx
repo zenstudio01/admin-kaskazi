@@ -7,6 +7,7 @@ import {
   UserCheck,
   Users as UsersIcon,
 } from "lucide-react";
+import api from "../api/api";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -14,15 +15,11 @@ export default function Users() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const API_URL = "http://127.0.0.1:8000/api";
-
   const fetchUsers = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/admin_users/`
-      );
+      const response = await api.get("/admin_users/");
 
-      const data = await response.json();
+      const data = response.data;
 
       setUsers(data);
       setFilteredUsers(data);
@@ -56,8 +53,8 @@ export default function Users() {
 
   const verifyWorker = async (id) => {
     try {
-      const response = await fetch(
-        `${API_URL}/verify_worker/${id}/`,
+      const response = await api.post(
+        `/verify_worker/${id}/`,
         {
           method: "POST",
         }
@@ -73,8 +70,8 @@ export default function Users() {
 
   const suspendUser = async (id) => {
     try {
-      const response = await fetch(
-        `${API_URL}/suspend_user/${id}/`,
+      const response = await api.post(
+        `/suspend_user/${id}/`,
         {
           method: "POST",
         }
@@ -90,8 +87,8 @@ export default function Users() {
 
   const activateUser = async (id) => {
     try {
-      const response = await fetch(
-        `${API_URL}/activate_user/${id}/`,
+      const response = await api.post(
+        `/activate_user/${id}/`,
         {
           method: "POST",
         }
@@ -189,12 +186,12 @@ export default function Users() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-600">
-                            {user.name?.charAt(0)}
+                            {user.full_name?.charAt(0)}
                           </div>
 
                           <div>
                             <p className="font-medium">
-                              {user.name}
+                              {user.full_name}
                             </p>
 
                             <p className="text-xs text-slate-500">

@@ -49,11 +49,6 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="border-b border-white/10 p-6">
         <div className="flex items-center gap-3">
-          <img
-            src="/logo.png"
-            alt="Kaskazi"
-            className="w-12 h-12 object-contain"
-          />
 
           <div>
             <h1 className="font-bold text-2xl">KASKAZI</h1>

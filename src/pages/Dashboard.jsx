@@ -8,6 +8,7 @@ import {
   TrendingUp,
   Activity,
 } from "lucide-react";
+import api from "../api/api";
 
 export default function Dashboard() {
   const [dashboard, setDashboard] = useState(null);
@@ -15,11 +16,9 @@ export default function Dashboard() {
 
   const fetchDashboard = async () => {
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/admin_dashboard/"
-      );
+      const response = await api.get("/admin_dashboard/");
 
-      const data = await response.json();
+      const data = response.data;
 
       setDashboard(data);
     } catch (error) {
