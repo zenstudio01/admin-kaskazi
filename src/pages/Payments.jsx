@@ -321,7 +321,7 @@ Revenue
 
 <h2 className="text-3xl font-bold text-green-600">
 
-KES {totalAmount.toLocaleString()}
+Ksh {totalAmount.toLocaleString()}
 
 </h2>
 
@@ -487,7 +487,7 @@ Total Money Processed
 
 <h2 className="text-4xl font-bold mt-2">
 
-KES {totalAmount.toLocaleString()}
+Ksh {totalAmount.toLocaleString()}
 
 </h2>
 
@@ -691,7 +691,7 @@ className="border-t hover:bg-slate-50"
 <td className="px-6 py-4 font-semibold text-green-600">
 
 
-KES {Number(payment.amount).toLocaleString()}
+Ksh {Number(payment.amount).toLocaleString()}
 
 
 </td>

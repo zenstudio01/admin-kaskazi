@@ -53,7 +53,7 @@ export default function Dashboard() {
     },
     {
       title: "Payments",
-      value: `KES ${dashboard?.total_payments || 0}`,
+      value: `Ksh ${dashboard?.revenue || 0}`,
       icon: CreditCard,
       color: "bg-purple-100 text-purple-600",
     },
@@ -211,7 +211,7 @@ export default function Dashboard() {
               </p>
 
               <h2 className="text-4xl font-bold mt-2">
-                KES {dashboard?.total_payments || 0}
+                Ksh {dashboard?.revenue || 0}
               </h2>
 
               <p className="mt-3 text-sm opacity-70">
