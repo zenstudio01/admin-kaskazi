@@ -225,7 +225,7 @@ export default function Jobs() {
           </p>
 
           <h2 className="text-4xl font-bold mt-2">
-            KES {totalRevenue.toLocaleString()}
+            Ksh {totalRevenue.toLocaleString()}
           </h2>
 
           <p className="mt-2 opacity-70">
