@@ -10,6 +10,9 @@ import Reviews from './pages/Reviews';
 import Payments from './pages/Payments';
 import Activities from './pages/Activity';
 import Index from './pages/Index';
+import Notifications from './pages/Notifications';
+import ChatMonitoring from './pages/ChartMonitoring';
+import Disputes from './pages/Disputes';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/payments" element={<Payments />} />
         <Route path="/activity" element={<Activities />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/chat-monitoring" element={<ChatMonitoring />} />
+        <Route path="/disputes" element={<Disputes />} />
 
 
       </Routes>

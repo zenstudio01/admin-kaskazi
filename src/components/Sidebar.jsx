@@ -6,6 +6,9 @@ import {
   Star,
   Activity,
   LogOut,
+  MessageCircle,
+  Bell,
+  ShieldAlert
 } from "lucide-react";
 
 import { NavLink, useNavigate } from "react-router-dom";
@@ -42,6 +45,21 @@ export default function Sidebar() {
       name: "Activity",
       icon: Activity,
       path: "/activity",
+    },
+    {
+      name: "Notifications",
+      icon: Bell,
+      path: "/notifications",
+    },
+    {
+      name: "Chat Monitoring",
+      icon: MessageCircle,
+      path: "/chat-monitoring",
+    },
+    {
+      name: "Disputes",
+      icon: ShieldAlert,
+      path: "/disputes",
     },
   ];
 

@@ -3,8 +3,16 @@ import {
   Search,
   UserCircle2,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const storedUser = localStorage.getItem("admin");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
+   const handleNotifications = () => {
+    navigate("/notifications");
+  };
   return (
     <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
       {/* Search */}
@@ -23,7 +31,7 @@ export default function Navbar() {
 
       {/* Right Section */}
       <div className="flex items-center gap-5">
-        <button className="relative">
+        <button onClick={handleNotifications} className="relative">
           <Bell
             size={22}
             className="text-slate-600"
@@ -40,7 +48,7 @@ export default function Navbar() {
 
           <div>
             <h4 className="font-semibold text-slate-800">
-              Admin
+              {user.user_name}
             </h4>
 
             <p className="text-xs text-slate-500">

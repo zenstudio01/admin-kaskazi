@@ -106,6 +106,17 @@ export default function Jobs() {
     }
   };
 
+
+  if (loading) {
+      return (
+        <AdminLayout>
+          <div className="flex justify-center items-center h-[70vh]">
+            <div className="h-12 w-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        </AdminLayout>
+      );
+    }
+
   return (
     <AdminLayout>
       <div className="space-y-6">
