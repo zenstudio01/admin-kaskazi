@@ -13,6 +13,8 @@ import Index from './pages/Index';
 import Notifications from './pages/Notifications';
 import ChatMonitoring from './pages/ChartMonitoring';
 import Disputes from './pages/Disputes';
+import Workers from './pages/Workers';
+import WorkerDetails from './pages/WorkerDetails';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/chat-monitoring" element={<ChatMonitoring />} />
         <Route path="/disputes" element={<Disputes />} />
+        <Route path="/workers" element={<Workers />} />
+        <Route path="/workers/:id" element={<WorkerDetails />} />
 
 
       </Routes>

@@ -87,13 +87,13 @@ export default function Login() {
           {/* Header */}
           <div className="bg-[#062E5B] px-8 py-8 text-center">
             <img
-              src="/kaskazi_icon.png"
+              src="/kaskazi_new.jpeg"
               alt="Kaskazi"
-              className="w-24 h-24 mx-auto object-contain"
+              className="w-24 h-24 mx-auto object-contain rounded-full"
             />
 
             <h1 className="text-white text-3xl font-bold mt-4">
-              KASKAZI
+              Kaskazi
             </h1>
 
             <p className="text-slate-300 mt-2">

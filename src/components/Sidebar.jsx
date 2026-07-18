@@ -27,6 +27,11 @@ export default function Sidebar() {
       path: "/users",
     },
     {
+      name: "Workers",
+      icon: Users,
+      path: "/workers",
+    },
+    {
       name: "Jobs",
       icon: Briefcase,
       path: "/jobs",
