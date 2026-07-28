@@ -10,6 +10,7 @@ import {
 
 import AdminLayout from "../layouts/AdminLayout";
 import api from "../api/api";
+import Colors from "../constants/colors";
 
 export default function Workers() {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ export default function Workers() {
   const fetchWorkers = async () => {
     try {
       const response = await api.get("/admin/workers/");
-
       const data = response.data.workers || [];
 
       setWorkers(data);
@@ -41,41 +41,32 @@ export default function Workers() {
   useEffect(() => {
     const filtered = workers.filter(
       (worker) =>
-        worker.full_name
-          ?.toLowerCase()
-          .includes(search.toLowerCase()) ||
-        worker.email
-          ?.toLowerCase()
-          .includes(search.toLowerCase()) ||
-        worker.profession
-          ?.toLowerCase()
-          .includes(search.toLowerCase())
+        worker.full_name?.toLowerCase().includes(search.toLowerCase()) ||
+        worker.email?.toLowerCase().includes(search.toLowerCase()) ||
+        worker.profession?.toLowerCase().includes(search.toLowerCase())
     );
 
     setFilteredWorkers(filtered);
   }, [search, workers]);
 
   const totalWorkers = workers.length;
-
-  const verifiedWorkers = workers.filter(
-    (worker) => worker.verified
-  ).length;
-
-  const pendingWorkers = workers.filter(
-    (worker) => !worker.verified
-  ).length;
-
-  const availableWorkers = workers.filter(
-    (worker) => worker.is_available
-  ).length;
+  const verifiedWorkers = workers.filter((worker) => worker.verified).length;
+  const pendingWorkers = workers.filter((worker) => !worker.verified).length;
+  const availableWorkers = workers.filter((worker) => worker.is_available).length;
 
   const getVerificationBadge = (verified) => {
     return verified ? (
-      <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+      <span
+        className="px-3 py-1 rounded-full text-xs font-semibold"
+        style={{
+          backgroundColor: "rgba(90, 153, 76, 0.15)",
+          color: Colors.placeholder,
+        }}
+      >
         Verified
       </span>
     ) : (
-      <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">
+      <span className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-semibold">
         Pending
       </span>
     );
@@ -83,11 +74,17 @@ export default function Workers() {
 
   const getAvailabilityBadge = (available) => {
     return available ? (
-      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+      <span
+        className="px-3 py-1 rounded-full text-xs font-semibold"
+        style={{
+          backgroundColor: "rgba(15, 34, 54, 0.1)",
+          color: Colors.typography,
+        }}
+      >
         Available
       </span>
     ) : (
-      <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+      <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">
         Busy
       </span>
     );
@@ -97,7 +94,13 @@ export default function Workers() {
     return (
       <AdminLayout>
         <div className="flex justify-center items-center h-[70vh]">
-          <div className="h-12 w-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+          <div
+            className="h-12 w-12 border-4 border-t-transparent rounded-full animate-spin"
+            style={{
+              borderColor: Colors.background,
+              borderTopColor: "transparent",
+            }}
+          ></div>
         </div>
       </AdminLayout>
     );
@@ -106,305 +109,309 @@ export default function Workers() {
   return (
     <AdminLayout>
       <div className="space-y-6">
-
         {/* Header */}
-
         <div>
-          <h1 className="text-3xl font-bold text-[#062E5B]">
+          <h1
+            className="text-3xl font-bold tracking-tight"
+            style={{ color: Colors.typography }}
+          >
             Workers Management
           </h1>
 
-          <p className="text-slate-500 mt-1">
+          <p
+            className="mt-1 text-sm font-medium"
+            style={{ color: Colors.placeholder }}
+          >
             Review, verify and manage all workers.
           </p>
         </div>
 
-        {/* Statistics */}
-
+        {/* Statistics Cards */}
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-          <div className="bg-white rounded-2xl shadow-sm p-5">
-
+          {/* Total Workers */}
+          <div
+            className="rounded-2xl shadow-sm p-5 border"
+            style={{
+              backgroundColor: Colors.primary,
+              borderColor: "rgba(15, 34, 54, 0.08)",
+            }}
+          >
             <div className="flex justify-between items-center">
-
               <div>
-
-                <p className="text-slate-500 text-sm">
+                <p
+                  className="text-xs font-semibold uppercase tracking-wider"
+                  style={{ color: Colors.placeholder }}
+                >
                   Total Workers
                 </p>
 
-                <h2 className="text-3xl font-bold">
+                <h2
+                  className="text-3xl font-bold mt-2"
+                  style={{ color: Colors.typography }}
+                >
                   {totalWorkers}
                 </h2>
-
               </div>
 
-              <div className="bg-orange-100 p-3 rounded-xl">
-
-                <Users
-                  className="text-orange-600"
-                  size={26}
-                />
-
+              <div
+                className="p-3 rounded-xl"
+                style={{ backgroundColor: "rgba(15, 34, 54, 0.08)" }}
+              >
+                <Users style={{ color: Colors.typography }} size={26} />
               </div>
-
             </div>
-
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm p-5">
-
+          {/* Verified Workers */}
+          <div
+            className="rounded-2xl shadow-sm p-5 border"
+            style={{
+              backgroundColor: Colors.primary,
+              borderColor: "rgba(15, 34, 54, 0.08)",
+            }}
+          >
             <div className="flex justify-between items-center">
-
               <div>
-
-                <p className="text-slate-500 text-sm">
+                <p
+                  className="text-xs font-semibold uppercase tracking-wider"
+                  style={{ color: Colors.placeholder }}
+                >
                   Verified
                 </p>
 
-                <h2 className="text-3xl font-bold text-green-600">
+                <h2
+                  className="text-3xl font-bold mt-2"
+                  style={{ color: Colors.background }}
+                >
                   {verifiedWorkers}
                 </h2>
-
               </div>
 
-              <div className="bg-green-100 p-3 rounded-xl">
-
-                <BadgeCheck
-                  className="text-green-600"
-                  size={26}
-                />
-
+              <div
+                className="p-3 rounded-xl"
+                style={{ backgroundColor: "rgba(90, 153, 76, 0.12)" }}
+              >
+                <BadgeCheck style={{ color: Colors.background }} size={26} />
               </div>
-
             </div>
-
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm p-5">
-
+          {/* Pending Workers */}
+          <div
+            className="rounded-2xl shadow-sm p-5 border"
+            style={{
+              backgroundColor: Colors.primary,
+              borderColor: "rgba(15, 34, 54, 0.08)",
+            }}
+          >
             <div className="flex justify-between items-center">
-
               <div>
-
-                <p className="text-slate-500 text-sm">
+                <p
+                  className="text-xs font-semibold uppercase tracking-wider"
+                  style={{ color: Colors.placeholder }}
+                >
                   Pending
                 </p>
 
-                <h2 className="text-3xl font-bold text-yellow-600">
+                <h2 className="text-3xl font-bold mt-2 text-amber-600">
                   {pendingWorkers}
                 </h2>
-
               </div>
 
-              <div className="bg-yellow-100 p-3 rounded-xl">
-
-                <ShieldAlert
-                  className="text-yellow-600"
-                  size={26}
-                />
-
+              <div className="bg-amber-100 p-3 rounded-xl">
+                <ShieldAlert className="text-amber-600" size={26} />
               </div>
-
             </div>
-
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm p-5">
-
+          {/* Available Workers */}
+          <div
+            className="rounded-2xl shadow-sm p-5 border"
+            style={{
+              backgroundColor: Colors.primary,
+              borderColor: "rgba(15, 34, 54, 0.08)",
+            }}
+          >
             <div className="flex justify-between items-center">
-
               <div>
-
-                <p className="text-slate-500 text-sm">
+                <p
+                  className="text-xs font-semibold uppercase tracking-wider"
+                  style={{ color: Colors.placeholder }}
+                >
                   Available
                 </p>
 
-                <h2 className="text-3xl font-bold text-blue-600">
+                <h2
+                  className="text-3xl font-bold mt-2"
+                  style={{ color: Colors.typography }}
+                >
                   {availableWorkers}
                 </h2>
-
               </div>
 
-              <div className="bg-blue-100 p-3 rounded-xl">
-
-                <Clock3
-                  className="text-blue-600"
-                  size={26}
-                />
-
+              <div
+                className="p-3 rounded-xl"
+                style={{ backgroundColor: "rgba(15, 34, 54, 0.08)" }}
+              >
+                <Clock3 style={{ color: Colors.typography }} size={26} />
               </div>
-
             </div>
-
           </div>
-
         </div>
 
         {/* Search */}
-
-        <div className="bg-white rounded-2xl shadow-sm p-4">
-
+        <div
+          className="rounded-2xl shadow-sm p-4 border"
+          style={{
+            backgroundColor: Colors.primary,
+            borderColor: "rgba(15, 34, 54, 0.08)",
+          }}
+        >
           <div className="relative max-w-md">
-
             <Search
               size={18}
-              className="absolute left-4 top-3.5 text-slate-400"
+              className="absolute left-4 top-3.5"
+              style={{ color: Colors.placeholder }}
             />
 
             <input
               type="text"
               placeholder="Search workers..."
               value={search}
-              onChange={(e) =>
-                setSearch(e.target.value)
-              }
-              className="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500"
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-11 pr-4 py-2.5 border border-slate-300/80 rounded-xl focus:outline-none transition-all text-sm"
+              style={{
+                color: Colors.typography,
+                backgroundColor: "#ffffff",
+              }}
             />
-
           </div>
-
         </div>
 
         {/* Workers Table */}
-
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-
+        <div
+          className="rounded-2xl shadow-sm overflow-hidden border"
+          style={{
+            backgroundColor: Colors.primary,
+            borderColor: "rgba(15, 34, 54, 0.08)",
+          }}
+        >
           <div className="overflow-x-auto">
-
-            <table className="w-full">
-
-              <thead className="bg-slate-50">
-
-                <tr>
-
-                  <th className="px-6 py-4 text-left">
-                    Worker
-                  </th>
-
-                  <th className="px-6 py-4 text-left">
-                    Profession
-                  </th>
-
-                  <th className="px-6 py-4 text-left">
-                    Experience
-                  </th>
-
-                  <th className="px-6 py-4 text-left">
-                    Hourly Rate
-                  </th>
-
-                  <th className="px-6 py-4 text-left">
-                    Status
-                  </th>
-
-                  <th className="px-6 py-4 text-left">
-                    Availability
-                  </th>
-
-                  <th className="px-6 py-4 text-left">
-                    Action
-                  </th>
-
+            <table className="w-full text-sm">
+              <thead>
+                <tr
+                  className="border-b text-left text-xs uppercase tracking-wider font-semibold"
+                  style={{
+                    backgroundColor: "rgba(15, 34, 54, 0.03)",
+                    color: Colors.placeholder,
+                    borderColor: "rgba(15, 34, 54, 0.08)",
+                  }}
+                >
+                  <th className="px-6 py-4">Worker</th>
+                  <th className="px-6 py-4">Profession</th>
+                  <th className="px-6 py-4">Experience</th>
+                  <th className="px-6 py-4">Hourly Rate</th>
+                  <th className="px-6 py-4">Status</th>
+                  <th className="px-6 py-4">Availability</th>
+                  <th className="px-6 py-4 text-center">Action</th>
                 </tr>
-
               </thead>
 
-              <tbody>
-
+              <tbody className="divide-y divide-slate-200/60">
                 {filteredWorkers.map((worker) => (
-
                   <tr
                     key={worker.id}
-                    className="border-t hover:bg-slate-50"
+                    className="transition-colors hover:bg-black/[0.02]"
                   >
-
+                    {/* Worker Info */}
                     <td className="px-6 py-4">
-
                       <div className="flex items-center gap-3">
-
                         <img
-                          src={worker.profile_image}
-                          alt=""
-                          className="w-12 h-12 rounded-full object-cover"
+                          src={worker.profile_image || "/avatar-placeholder.png"}
+                          alt={worker.full_name}
+                          className="w-10 h-10 rounded-full object-cover border border-slate-200"
                         />
 
                         <div>
-
-                          <h3 className="font-semibold">
+                          <h3
+                            className="font-semibold"
+                            style={{ color: Colors.typography }}
+                          >
                             {worker.full_name}
                           </h3>
 
-                          <p className="text-sm text-slate-500">
+                          <p
+                            className="text-xs"
+                            style={{ color: Colors.placeholder }}
+                          >
                             {worker.email}
                           </p>
-
                         </div>
-
                       </div>
-
                     </td>
 
-                    <td className="px-6 py-4">
+                    {/* Profession */}
+                    <td
+                      className="px-6 py-4 font-medium"
+                      style={{ color: Colors.typography }}
+                    >
                       {worker.profession}
                     </td>
 
-                    <td className="px-6 py-4">
+                    {/* Experience */}
+                    <td
+                      className="px-6 py-4"
+                      style={{ color: Colors.typography }}
+                    >
                       {worker.experience_years} Years
                     </td>
 
-                    <td className="px-6 py-4 font-semibold text-green-600">
+                    {/* Hourly Rate */}
+                    <td
+                      className="px-6 py-4 font-semibold"
+                      style={{ color: Colors.background }}
+                    >
                       KES {Number(worker.hourly_rate).toLocaleString()}
                     </td>
 
+                    {/* Status */}
                     <td className="px-6 py-4">
                       {getVerificationBadge(worker.verified)}
                     </td>
 
+                    {/* Availability */}
                     <td className="px-6 py-4">
                       {getAvailabilityBadge(worker.is_available)}
                     </td>
 
-                    <td className="px-6 py-4">
-
+                    {/* Action */}
+                    <td className="px-6 py-4 text-center">
                       <button
-                        onClick={() =>
-                          navigate(`/workers/${worker.id}`)
-                        }
-                        className="bg-[#062E5B] hover:bg-[#0B3D75] text-white px-4 py-2 rounded-lg"
+                        onClick={() => navigate(`/workers/${worker.id}`)}
+                        className="text-white px-3.5 py-1.5 rounded-lg text-xs font-medium shadow-sm transition-all hover:brightness-110 active:scale-[0.98]"
+                        style={{ backgroundColor: Colors.typography }}
                       >
                         View Documents
                       </button>
-
                     </td>
-
                   </tr>
-
                 ))}
 
                 {filteredWorkers.length === 0 && (
-
                   <tr>
-
                     <td
                       colSpan="7"
-                      className="text-center py-10 text-slate-500"
+                      className="text-center py-12 font-medium"
+                      style={{ color: Colors.placeholder }}
                     >
-                      No workers found.
+                      No workers found matching your criteria.
                     </td>
-
                   </tr>
-
                 )}
-
               </tbody>
-
             </table>
-
           </div>
-
         </div>
-
       </div>
     </AdminLayout>
   );

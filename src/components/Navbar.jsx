@@ -4,54 +4,78 @@ import {
   UserCircle2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Colors from "../constants/colors";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("admin");
   const user = storedUser ? JSON.parse(storedUser) : null;
 
-   const handleNotifications = () => {
+  const handleNotifications = () => {
     navigate("/notifications");
   };
+
   return (
-    <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
-      {/* Search */}
+    <header 
+      className="px-6 py-4 flex items-center justify-between border-b shadow-sm"
+      style={{ 
+        backgroundColor: Colors.primary, 
+        borderColor: "rgba(15, 34, 54, 0.1)" 
+      }}
+    >
+      {/* Search Input */}
       <div className="relative w-full max-w-md">
         <Search
           size={18}
-          className="absolute left-3 top-3 text-slate-400"
+          className="absolute left-3.5 top-3 transition-colors"
+          style={{ color: Colors.placeholder }}
         />
 
         <input
           type="text"
           placeholder="Search users, jobs, payments..."
-          className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#F57C00]"
+          className="w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-slate-300/80 focus:outline-none transition-all shadow-sm"
+          style={{
+            color: Colors.typography,
+            backgroundColor: "#ffffff",
+          }}
         />
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center gap-5">
-        <button onClick={handleNotifications} className="relative">
+      <div className="flex items-center gap-6">
+        {/* Notification Bell */}
+        <button 
+          onClick={handleNotifications} 
+          className="relative p-2 rounded-lg hover:bg-black/5 transition-colors"
+          aria-label="Notifications"
+        >
           <Bell
             size={22}
-            className="text-slate-600"
+            style={{ color: Colors.typography }}
           />
-
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+          <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
         </button>
 
-        <div className="flex items-center gap-3">
+        {/* User Profile */}
+        <div className="flex items-center gap-3 pl-2 border-l border-slate-300/60">
           <UserCircle2
-            size={40}
-            className="text-[#062E5B]"
+            size={38}
+            style={{ color: Colors.typography }}
           />
 
           <div>
-            <h4 className="font-semibold text-slate-800">
-              {user.user_name}
+            <h4 
+              className="font-semibold text-sm leading-tight"
+              style={{ color: Colors.typography }}
+            >
+              {user?.user_name || "Admin"}
             </h4>
 
-            <p className="text-xs text-slate-500">
+            <p 
+              className="text-xs mt-0.5"
+              style={{ color: Colors.placeholder }}
+            >
               Super Administrator
             </p>
           </div>
